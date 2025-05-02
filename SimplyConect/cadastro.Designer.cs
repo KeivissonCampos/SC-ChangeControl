@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.textBox_FoundErro = new System.Windows.Forms.TextBox();
-            this.picImagem = new System.Windows.Forms.PictureBox();
             this.checkBox_Android = new System.Windows.Forms.CheckBox();
             this.checkBox_IOS = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -52,37 +51,27 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button_Save = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
+            this.picImagem = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.text_FileName = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox_FoundErro
             // 
-            this.textBox_FoundErro.Location = new System.Drawing.Point(12, 228);
+            this.textBox_FoundErro.Location = new System.Drawing.Point(12, 249);
             this.textBox_FoundErro.Multiline = true;
             this.textBox_FoundErro.Name = "textBox_FoundErro";
             this.textBox_FoundErro.Size = new System.Drawing.Size(406, 98);
             this.textBox_FoundErro.TabIndex = 0;
             this.textBox_FoundErro.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // picImagem
-            // 
-            this.picImagem.Location = new System.Drawing.Point(6, 19);
-            this.picImagem.Name = "picImagem";
-            this.picImagem.Size = new System.Drawing.Size(409, 395);
-            this.picImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picImagem.TabIndex = 1;
-            this.picImagem.TabStop = false;
             // 
             // checkBox_Android
             // 
@@ -108,7 +97,7 @@
             // 
             this.groupBox1.Controls.Add(this.checkBox_IOS);
             this.groupBox1.Controls.Add(this.checkBox_Android);
-            this.groupBox1.Location = new System.Drawing.Point(12, 38);
+            this.groupBox1.Location = new System.Drawing.Point(12, 59);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(412, 47);
             this.groupBox1.TabIndex = 5;
@@ -120,7 +109,7 @@
             this.groupBox2.Controls.Add(this.checkBox_Test);
             this.groupBox2.Controls.Add(this.checkBox_Sandbox);
             this.groupBox2.Controls.Add(this.checkBox_Production);
-            this.groupBox2.Location = new System.Drawing.Point(12, 91);
+            this.groupBox2.Location = new System.Drawing.Point(12, 112);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(412, 47);
             this.groupBox2.TabIndex = 6;
@@ -164,7 +153,7 @@
             this.groupBox3.Controls.Add(this.radioButton_Major);
             this.groupBox3.Controls.Add(this.radioButton_Critical);
             this.groupBox3.Controls.Add(this.radioButton_Blocker);
-            this.groupBox3.Location = new System.Drawing.Point(12, 144);
+            this.groupBox3.Location = new System.Drawing.Point(12, 165);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(412, 52);
             this.groupBox3.TabIndex = 8;
@@ -235,7 +224,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 212);
+            this.label1.Location = new System.Drawing.Point(9, 233);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 9;
@@ -245,7 +234,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 338);
+            this.label2.Location = new System.Drawing.Point(12, 359);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 13);
             this.label2.TabIndex = 11;
@@ -253,7 +242,7 @@
             // 
             // textBox_CorrectTerm
             // 
-            this.textBox_CorrectTerm.Location = new System.Drawing.Point(12, 354);
+            this.textBox_CorrectTerm.Location = new System.Drawing.Point(12, 375);
             this.textBox_CorrectTerm.Multiline = true;
             this.textBox_CorrectTerm.Name = "textBox_CorrectTerm";
             this.textBox_CorrectTerm.Size = new System.Drawing.Size(406, 98);
@@ -262,7 +251,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 467);
+            this.label3.Location = new System.Drawing.Point(10, 488);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 12;
@@ -270,14 +259,14 @@
             // 
             // textBox_User
             // 
-            this.textBox_User.Location = new System.Drawing.Point(53, 464);
+            this.textBox_User.Location = new System.Drawing.Point(53, 485);
             this.textBox_User.Name = "textBox_User";
             this.textBox_User.Size = new System.Drawing.Size(365, 20);
             this.textBox_User.TabIndex = 13;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(498, 464);
+            this.button1.Location = new System.Drawing.Point(498, 485);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(316, 23);
             this.button1.TabIndex = 14;
@@ -295,24 +284,6 @@
             this.button_Save.UseVisualStyleBackColor = true;
             this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(647, 503);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "label4";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(647, 516);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "label5";
-            // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
@@ -321,42 +292,49 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.picImagem);
-            this.groupBox4.Location = new System.Drawing.Point(448, 38);
+            this.groupBox4.Location = new System.Drawing.Point(448, 59);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(421, 420);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "IMAGE";
             // 
-            // label6
+            // picImagem
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(647, 529);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "label6";
+            this.picImagem.Location = new System.Drawing.Point(6, 19);
+            this.picImagem.Name = "picImagem";
+            this.picImagem.Size = new System.Drawing.Size(409, 395);
+            this.picImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picImagem.TabIndex = 1;
+            this.picImagem.TabStop = false;
             // 
-            // label7
+            // label4
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 516);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "label7";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Sheet Name: ";
+            // 
+            // text_FileName
+            // 
+            this.text_FileName.AutoSize = true;
+            this.text_FileName.Location = new System.Drawing.Point(81, 26);
+            this.text_FileName.Name = "text_FileName";
+            this.text_FileName.Size = new System.Drawing.Size(52, 13);
+            this.text_FileName.TabIndex = 20;
+            this.text_FileName.Text = "File name";
             // 
             // cadastro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 567);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.text_FileName);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.button_Save);
             this.Controls.Add(this.textBox_User);
             this.Controls.Add(this.label3);
@@ -372,7 +350,7 @@
             this.Name = "cadastro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "cadastro";
-            ((System.ComponentModel.ISupportInitialize)(this.picImagem)).EndInit();
+            this.Load += new System.EventHandler(this.cadastro_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -381,6 +359,7 @@
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picImagem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,11 +390,9 @@
         private System.Windows.Forms.RadioButton radioButton_Major;
         private System.Windows.Forms.RadioButton radioButton_Critical;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label text_FileName;
     }
 }

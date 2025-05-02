@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmbAba = new System.Windows.Forms.ComboBox();
             this.dgvRegistros = new System.Windows.Forms.DataGridView();
             this.btnLer = new System.Windows.Forms.Button();
@@ -51,24 +51,23 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btn_Traduzir_NoteRossi = new System.Windows.Forms.Button();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btn_Traduzir_NoteFaac = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_Traduzir_CorrectTerm = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_Traduzir_FoundError = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgExcel)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -99,34 +98,34 @@
             // 
             // dgvRegistros
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRegistros.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRegistros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRegistros.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRegistros.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRegistros.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvRegistros.Location = new System.Drawing.Point(3, 16);
             this.dgvRegistros.Name = "dgvRegistros";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRegistros.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRegistros.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRegistros.Size = new System.Drawing.Size(980, 252);
             this.dgvRegistros.TabIndex = 1;
             this.dgvRegistros.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
@@ -186,6 +185,7 @@
             this.configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
             this.configurationToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.configurationToolStripMenuItem.Text = "Configuration";
+            this.configurationToolStripMenuItem.Click += new System.EventHandler(this.configurationToolStripMenuItem_Click);
             // 
             // Panel_ContainerTop
             // 
@@ -209,7 +209,6 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(398, 0);
@@ -299,7 +298,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.Control;
-            this.panel6.Controls.Add(this.button6);
+            this.panel6.Controls.Add(this.btn_Traduzir_NoteRossi);
             this.panel6.Controls.Add(this.richTextBox4);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel6.Location = new System.Drawing.Point(533, 268);
@@ -308,15 +307,16 @@
             this.panel6.Size = new System.Drawing.Size(230, 247);
             this.panel6.TabIndex = 7;
             // 
-            // button6
+            // btn_Traduzir_NoteRossi
             // 
-            this.button6.Location = new System.Drawing.Point(185, 10);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(35, 20);
-            this.button6.TabIndex = 9;
-            this.button6.Text = "汉A";
-            this.toolTip1.SetToolTip(this.button6, "Traduzir");
-            this.button6.UseVisualStyleBackColor = true;
+            this.btn_Traduzir_NoteRossi.Location = new System.Drawing.Point(185, 10);
+            this.btn_Traduzir_NoteRossi.Name = "btn_Traduzir_NoteRossi";
+            this.btn_Traduzir_NoteRossi.Size = new System.Drawing.Size(35, 20);
+            this.btn_Traduzir_NoteRossi.TabIndex = 9;
+            this.btn_Traduzir_NoteRossi.Text = "汉A";
+            this.toolTip1.SetToolTip(this.btn_Traduzir_NoteRossi, "Traduzir");
+            this.btn_Traduzir_NoteRossi.UseVisualStyleBackColor = true;
+            this.btn_Traduzir_NoteRossi.Click += new System.EventHandler(this.btn_Traduzir_NoteRossi_Click);
             // 
             // richTextBox4
             // 
@@ -332,7 +332,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.Control;
-            this.panel5.Controls.Add(this.button5);
+            this.panel5.Controls.Add(this.btn_Traduzir_NoteFaac);
             this.panel5.Controls.Add(this.richTextBox3);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(303, 268);
@@ -341,15 +341,16 @@
             this.panel5.Size = new System.Drawing.Size(230, 247);
             this.panel5.TabIndex = 6;
             // 
-            // button5
+            // btn_Traduzir_NoteFaac
             // 
-            this.button5.Location = new System.Drawing.Point(185, 10);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(35, 20);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "汉A";
-            this.toolTip1.SetToolTip(this.button5, "Traduzir");
-            this.button5.UseVisualStyleBackColor = true;
+            this.btn_Traduzir_NoteFaac.Location = new System.Drawing.Point(185, 10);
+            this.btn_Traduzir_NoteFaac.Name = "btn_Traduzir_NoteFaac";
+            this.btn_Traduzir_NoteFaac.Size = new System.Drawing.Size(35, 20);
+            this.btn_Traduzir_NoteFaac.TabIndex = 8;
+            this.btn_Traduzir_NoteFaac.Text = "汉A";
+            this.toolTip1.SetToolTip(this.btn_Traduzir_NoteFaac, "Traduzir");
+            this.btn_Traduzir_NoteFaac.UseVisualStyleBackColor = true;
+            this.btn_Traduzir_NoteFaac.Click += new System.EventHandler(this.btn_Traduzir_NoteFaac_Click);
             // 
             // richTextBox3
             // 
@@ -391,10 +392,10 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.Control;
-            this.panel4.Controls.Add(this.button4);
+            this.panel4.Controls.Add(this.btn_Traduzir_CorrectTerm);
             this.panel4.Controls.Add(this.richTextBox2);
             this.panel4.Controls.Add(this.panel7);
-            this.panel4.Controls.Add(this.button3);
+            this.panel4.Controls.Add(this.btn_Traduzir_FoundError);
             this.panel4.Controls.Add(this.richTextBox1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(3, 268);
@@ -403,15 +404,16 @@
             this.panel4.Size = new System.Drawing.Size(300, 247);
             this.panel4.TabIndex = 3;
             // 
-            // button4
+            // btn_Traduzir_CorrectTerm
             // 
-            this.button4.Location = new System.Drawing.Point(255, 137);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(35, 20);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "汉A";
-            this.toolTip1.SetToolTip(this.button4, "Traduzir");
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_Traduzir_CorrectTerm.Location = new System.Drawing.Point(255, 137);
+            this.btn_Traduzir_CorrectTerm.Name = "btn_Traduzir_CorrectTerm";
+            this.btn_Traduzir_CorrectTerm.Size = new System.Drawing.Size(35, 20);
+            this.btn_Traduzir_CorrectTerm.TabIndex = 7;
+            this.btn_Traduzir_CorrectTerm.Text = "汉A";
+            this.toolTip1.SetToolTip(this.btn_Traduzir_CorrectTerm, "Traduzir");
+            this.btn_Traduzir_CorrectTerm.UseVisualStyleBackColor = true;
+            this.btn_Traduzir_CorrectTerm.Click += new System.EventHandler(this.btn_Traduzir_CorrectTerm_Click);
             // 
             // richTextBox2
             // 
@@ -433,16 +435,16 @@
             this.panel7.Size = new System.Drawing.Size(280, 5);
             this.panel7.TabIndex = 5;
             // 
-            // button3
+            // btn_Traduzir_FoundError
             // 
-            this.button3.Location = new System.Drawing.Point(255, 10);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(35, 20);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "汉A";
-            this.toolTip1.SetToolTip(this.button3, "Traduzir");
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btn_Traduzir_FoundError.Location = new System.Drawing.Point(255, 10);
+            this.btn_Traduzir_FoundError.Name = "btn_Traduzir_FoundError";
+            this.btn_Traduzir_FoundError.Size = new System.Drawing.Size(35, 20);
+            this.btn_Traduzir_FoundError.TabIndex = 4;
+            this.btn_Traduzir_FoundError.Text = "汉A";
+            this.toolTip1.SetToolTip(this.btn_Traduzir_FoundError, "Traduzir");
+            this.btn_Traduzir_FoundError.UseVisualStyleBackColor = true;
+            this.btn_Traduzir_FoundError.Click += new System.EventHandler(this.btn_Traduzir_FoundError_Click);
             // 
             // richTextBox1
             // 
@@ -482,15 +484,6 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(83, 63);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "label1";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -511,7 +504,6 @@
             this.Panel_ContainerTop.ResumeLayout(false);
             this.panel_ContainerComandos.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.panel_ContainerImg.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -560,14 +552,13 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.RichTextBox richTextBox4;
         private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_Traduzir_FoundError;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_Traduzir_NoteRossi;
+        private System.Windows.Forms.Button btn_Traduzir_NoteFaac;
+        private System.Windows.Forms.Button btn_Traduzir_CorrectTerm;
     }
 }
 

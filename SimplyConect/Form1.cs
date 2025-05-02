@@ -12,16 +12,23 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace SimplyConect
 {
     public partial class Form1 : Form
     {
         string textFoundError = "";
+        string textCorrectTerm = "";
+        string textNoteFaac = "";
+        string textNoteRossi = "";
 
         private string caminhoPlanilha = "";
         private List<Registro> registros = new List<Registro>();
         private byte[] imagemSelecionada = null;
+
+        string pathPlanilha;
 
         public Form1()
         {
@@ -32,25 +39,38 @@ namespace SimplyConect
             cmbArquivo.Items.AddRange(new[] { "REV 23_APP SIMPLY CONNECT TEST END USER", "REV 12_APP SIMPLY CONNECT PRO" });
             cmbArquivo.SelectedIndex = 0;
             cmbAba.SelectedIndex = 0;
-            AtualizaDataGridView();
+            //AtualizaDataGridView();
         }
 
         private void btnLer_Click(object sender, EventArgs e)
         {
+            ReadPath();
             AtualizaDataGridView();
         }
         void AtualizaDataGridView()
         {
-            caminhoPlanilha = @"C:\Users\keivisson21\Downloads\SP\" + cmbArquivo.SelectedItem.ToString() + " - ERRORS AND IMPROVEMENTS.xlsx";
-            registros.Clear();
-            string aba = cmbAba.SelectedItem.ToString();
-
             try
             {
+                if (cmbArquivo.SelectedItem == null || cmbAba.SelectedItem == null)
+                {
+                    MessageBox.Show("Selecione um arquivo e uma aba antes de continuar.");
+                    return;
+                }
+
+                caminhoPlanilha = Path.Combine(pathPlanilha, cmbArquivo.SelectedItem.ToString() + " - ERRORS AND IMPROVEMENTS.xlsx");
+                string aba = cmbAba.SelectedItem.ToString();
+                registros.Clear();
+
                 using (var package = new ExcelPackage(new FileInfo(caminhoPlanilha)))
                 {
                     var sheet = package.Workbook.Worksheets[aba];
                     int row = 3;
+
+                    if (sheet == null)
+                    {
+                        MessageBox.Show($"A aba '{aba}' não foi encontrada na planilha. Verifique se o caminho do arquivo está correto", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
                     while (sheet.Cells[row, 1].Value != null)
                     {
@@ -74,10 +94,10 @@ namespace SimplyConect
                 dgvRegistros.DataSource = null;
                 dgvRegistros.DataSource = registros;
             }
-            catch (IOException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Erro ao ler o arquivo. Ele pode estar aberto no Excel ou bloqueado por outro processo.",
-                                "Erro de leitura", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Erro ao atualizar a planilha:\n" + ex.Message,
+                                "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -108,15 +128,18 @@ namespace SimplyConect
 
             richTextBox2.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
             richTextBox2.AppendText("📖 Correct Term:\n\n");
-            richTextBox2.AppendText($"📌 {row.Cells["Correcao"].Value?.ToString()}\n\n");
+            textCorrectTerm = row.Cells["Correcao"].Value?.ToString();
+            richTextBox2.AppendText($"📌 {textCorrectTerm}\n\n");
 
             richTextBox3.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
             richTextBox3.AppendText("📖 FAAC NOTES:\n\n");
-            richTextBox3.AppendText($"📌 {row.Cells["NoteFaac"].Value?.ToString()}\n\n");
+            textNoteFaac = row.Cells["NoteFaac"].Value?.ToString();
+            richTextBox3.AppendText($"📌 {textNoteFaac}\n\n");
 
             richTextBox4.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
             richTextBox4.AppendText("📖 ROSSI NOTES:\n\n");
-            richTextBox4.AppendText($"📌 {row.Cells["NoteRossi"].Value?.ToString()}\n\n");
+            textNoteRossi = row.Cells["NoteRossi"].Value?.ToString();
+            richTextBox4.AppendText($"📌 {textNoteRossi}\n\n");
         }
 
         private Image ObterImagemDaLinha(ExcelWorksheet sheet, int linha)
@@ -174,66 +197,109 @@ namespace SimplyConect
 
         private void button1_Click(object sender, EventArgs e)
         {
-            cadastro cadastro = new cadastro(cmbAba.SelectedItem.ToString(), caminhoPlanilha);
+            string nomefile = cmbArquivo.SelectedItem.ToString() + " - ERRORS AND IMPROVEMENTS.xlsx";
+            cadastro cadastro = new cadastro(cmbAba.SelectedItem.ToString(), caminhoPlanilha, nomefile);
             cadastro.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            ReadPath();
         }
-        private string ExtrairTraducao(string json)
-        {
-            try
-            {
-                // Usar JsonDocument para analisar a resposta JSON
-                using (JsonDocument doc = JsonDocument.Parse(json))
-                {
-                    // A tradução está na posição [0][0][0] da resposta JSON
-                    string traducao = doc.RootElement[0][0][0].GetString();
 
-                    return traducao ?? "Erro ao processar a tradução";
-                }
-            }
-            catch (Exception ex)
-            {
-                return "Erro ao processar a resposta JSON: " + ex.Message;
-            }
+        void ReadPath()
+        {
+            if (!File.Exists("pastas.json"))
+                return;
+
+            string json = File.ReadAllText("pastas.json");
+            var pastas = JsonConvert.DeserializeObject<List<PastaInfo>>(json);
+
+            pathPlanilha = pastas[0].Caminho;
         }
-        private async void button3_Click(object sender, EventArgs e)
-        {
-            string textoOriginal = textFoundError;  // O texto que o usuário quer traduzir
-            string idiomaOrigem = "en";  // Idioma de origem (ex: "en" para inglês)
-            string idiomaDestino = "pt";  // Idioma de destino (ex: "pt" para português)
 
-            // Construir a URL para a requisição
-            string url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={idiomaOrigem}&tl={idiomaDestino}&dt=t&q={Uri.EscapeDataString(textoOriginal)}";
+        private async Task<string> ExtrairTraducao(string text)
+        {
+            string idiomaOrigem = "en";
+            string idiomaDestino = "pt";
+            string traducao = "";
+
+            string url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={idiomaOrigem}&tl={idiomaDestino}&dt=t&q={Uri.EscapeDataString(text)}";
 
             using (HttpClient client = new HttpClient())
             {
                 try
                 {
-                    // Fazer a requisição GET
                     HttpResponseMessage response = await client.GetAsync(url);
                     response.EnsureSuccessStatusCode();
 
-                    // Ler o conteúdo da resposta
                     string resultado = await response.Content.ReadAsStringAsync();
 
-                    // Processar a resposta JSON
-                    string traducao = ExtrairTraducao(resultado);
-
-                    // Exibir a tradução na label
-                    //textBox1.Text = traducao;
-                    richTextBox1.Clear();
-                    richTextBox1.AppendText("📖 Found Error:\n\n");
-                    richTextBox1.AppendText($"📌 {traducao}\n\n");
+                    try
+                    {
+                        using (JsonDocument doc = JsonDocument.Parse(resultado))
+                        {
+                            traducao = doc.RootElement[0][0][0].GetString();
+                            return traducao ?? "Erro ao processar a tradução";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return "Erro ao processar a resposta JSON: " + ex.Message;
+                    }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Erro ao traduzir: " + ex.Message);
+                    return "Erro ao traduzir.";
                 }
             }
+        }
+
+        private async void btn_Traduzir_FoundError_Click(object sender, EventArgs e)
+        {
+            string textTraduzido = await ExtrairTraducao(textFoundError);
+
+            richTextBox1.Clear();
+            richTextBox1.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
+            richTextBox1.AppendText("📖 Found Error:\n\n");
+            richTextBox1.AppendText($"📌 {textTraduzido}\n\n");
+        }
+
+        private async void btn_Traduzir_CorrectTerm_Click(object sender, EventArgs e)
+        {
+            string textTraduzido = await ExtrairTraducao(textCorrectTerm);
+
+            richTextBox2.Clear();
+            richTextBox2.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
+            richTextBox2.AppendText("📖 Correct Term:\n\n");
+            richTextBox2.AppendText($"📌 {textTraduzido}\n\n");
+        }
+
+        private async void btn_Traduzir_NoteFaac_Click(object sender, EventArgs e)
+        {
+            string textTraduzido = await ExtrairTraducao(textNoteFaac);
+
+            richTextBox3.Clear();
+            richTextBox3.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
+            richTextBox3.AppendText("📖 FAAC NOTES:\n\n");
+            richTextBox3.AppendText($"📌 {textTraduzido}\n\n");
+        }
+
+        private async void btn_Traduzir_NoteRossi_Click(object sender, EventArgs e)
+        {
+            string textTraduzido = await ExtrairTraducao(textNoteRossi);
+
+            richTextBox4.Clear();
+            richTextBox4.SelectionFont = new Font("Arial", 10, FontStyle.Bold);
+            richTextBox4.AppendText("📖 ROSSI NOTES:\n\n");
+            richTextBox4.AppendText($"📌 {textTraduzido}\n\n");
+        }
+
+        private void configurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Config config = new Config();
+            config.ShowDialog();
         }
     }
 

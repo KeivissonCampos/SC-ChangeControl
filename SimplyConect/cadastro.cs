@@ -29,15 +29,15 @@ namespace SimplyConect
 
         string cmbAba = "";
         string filePath = "";
+        string nomefile = "";
 
-        public cadastro(string _cmbAba, string _filePath)
+        public cadastro(string _cmbAba, string _filePath, string _nomefile)
         {
             InitializeComponent();
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             cmbAba = _cmbAba;
             filePath = _filePath;
-
-            label7.Text = cmbAba;
+            nomefile = _nomefile;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -225,10 +225,11 @@ namespace SimplyConect
             cellFoundErro = textBox_FoundErro.Text;
             cellCorrectTerm = textBox_CorrectTerm.Text;
             cellUser = textBox_User.Text;
+        }
 
-            label4.Text = cellWhere;
-            label5.Text = cellEnvironment;
-            label6.Text = cellPriority;
+        private void cadastro_Load(object sender, EventArgs e)
+        {
+            text_FileName.Text = nomefile;
         }
     }
 }
