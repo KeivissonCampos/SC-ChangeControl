@@ -36,10 +36,7 @@ namespace SimplyConect
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
             cmbAba.Items.AddRange(new[] { "Errors", "Improvements" });
-            //cmbArquivo.Items.AddRange(new[] { "REV 23_APP SIMPLY CONNECT TEST END USER", "REV 12_APP SIMPLY CONNECT PRO" });
-            //cmbArquivo.SelectedIndex = 0;
             cmbAba.SelectedIndex = 0;
-            //AtualizaDataGridView();
         }
 
         private void btnLer_Click(object sender, EventArgs e)
