@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.cmbAba = new System.Windows.Forms.ComboBox();
             this.dgvRegistros = new System.Windows.Forms.DataGridView();
             this.btnLer = new System.Windows.Forms.Button();
@@ -216,7 +217,7 @@
             this.groupBox4.Size = new System.Drawing.Size(746, 154);
             this.groupBox4.TabIndex = 18;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Configurar Planilha";
             // 
             // groupBox1
             // 
@@ -229,7 +230,7 @@
             this.groupBox1.Size = new System.Drawing.Size(398, 154);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Selecionar Planilha";
             // 
             // cmbArquivo
             // 
@@ -293,7 +294,7 @@
             this.groupBox2.Size = new System.Drawing.Size(986, 518);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Planilha de erros e melhorias";
             // 
             // panel6
             // 
@@ -477,7 +478,7 @@
             this.groupBox3.Size = new System.Drawing.Size(398, 518);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Text = "Imagem da celula";
             // 
             // fileSystemWatcher1
             // 
@@ -492,9 +493,10 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Panel_ContainerTop);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Simply Conect Change";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).EndInit();

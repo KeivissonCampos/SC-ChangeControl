@@ -36,8 +36,8 @@ namespace SimplyConect
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
             cmbAba.Items.AddRange(new[] { "Errors", "Improvements" });
-            cmbArquivo.Items.AddRange(new[] { "REV 23_APP SIMPLY CONNECT TEST END USER", "REV 12_APP SIMPLY CONNECT PRO" });
-            cmbArquivo.SelectedIndex = 0;
+            //cmbArquivo.Items.AddRange(new[] { "REV 23_APP SIMPLY CONNECT TEST END USER", "REV 12_APP SIMPLY CONNECT PRO" });
+            //cmbArquivo.SelectedIndex = 0;
             cmbAba.SelectedIndex = 0;
             //AtualizaDataGridView();
         }
@@ -57,7 +57,7 @@ namespace SimplyConect
                     return;
                 }
 
-                caminhoPlanilha = Path.Combine(pathPlanilha, cmbArquivo.SelectedItem.ToString() + " - ERRORS AND IMPROVEMENTS.xlsx");
+                caminhoPlanilha = Path.Combine(pathPlanilha, cmbArquivo.SelectedItem.ToString());
                 string aba = cmbAba.SelectedItem.ToString();
                 registros.Clear();
 
@@ -98,6 +98,24 @@ namespace SimplyConect
             {
                 MessageBox.Show("Erro ao atualizar a planilha:\n" + ex.Message,
                                 "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        void CarregarArquivosNoComboBox()
+        {
+            cmbArquivo.Items.Clear();
+
+            if (!Directory.Exists(pathPlanilha))
+            {
+                MessageBox.Show("A pasta selecionada não existe.");
+                return;
+            }
+
+            var arquivos = Directory.GetFiles(pathPlanilha, "*SIMPLY CONNECT*.xlsx");
+
+            foreach (var arquivo in arquivos)
+            {
+                cmbArquivo.Items.Add(Path.GetFileName(arquivo));
             }
         }
 
@@ -205,6 +223,7 @@ namespace SimplyConect
         private void Form1_Load(object sender, EventArgs e)
         {
             ReadPath();
+            CarregarArquivosNoComboBox();
         }
 
         void ReadPath()
@@ -239,8 +258,13 @@ namespace SimplyConect
                     {
                         using (JsonDocument doc = JsonDocument.Parse(resultado))
                         {
-                            traducao = doc.RootElement[0][0][0].GetString();
-                            return traducao ?? "Erro ao processar a tradução";
+                            var frases = doc.RootElement[0];
+                            foreach (var parte in frases.EnumerateArray())
+                            {
+                                traducao += parte[0].GetString();
+                            }
+
+                            return traducao;
                         }
                     }
                     catch (Exception ex)
