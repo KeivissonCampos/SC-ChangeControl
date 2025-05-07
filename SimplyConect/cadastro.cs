@@ -82,7 +82,8 @@ namespace SimplyConect
                                 var picture = sheet.Drawings.AddPicture(nomeImagem, new MemoryStream(imagemSelecionada));
 
                                 int alturaCelula = 280;
-                                int larguraCelula = 425; // você pode ajustar se quiser
+                                int larguraCelula = 425;
+                                int larguraCelula2 = 60;
 
                                 // Tamanho da imagem
                                 int larguraImagem = 245;
@@ -96,6 +97,7 @@ namespace SimplyConect
                                 picture.SetSize(220, 350);
 
                                 sheet.Row(row).Height = alturaCelula;
+                                sheet.Column(2).Width = larguraCelula2;
                             }
 
                         }
