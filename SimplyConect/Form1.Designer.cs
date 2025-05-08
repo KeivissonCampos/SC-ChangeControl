@@ -33,7 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.cmbAba = new System.Windows.Forms.ComboBox();
+            this.btn_traduzir = new System.Windows.Forms.ComboBox();
             this.dgvRegistros = new System.Windows.Forms.DataGridView();
             this.btnLer = new System.Windows.Forms.Button();
             this.imgExcel = new System.Windows.Forms.PictureBox();
@@ -51,24 +51,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.btn_Traduzir_NoteRossi = new System.Windows.Forms.Button();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.btn_Traduzir_NoteFaac = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.btn_Traduzir_CorrectTerm = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.btn_Traduzir_FoundError = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonOpenFile = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button_traduzir = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgExcel)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -81,21 +78,21 @@
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cmbAba
+            // btn_traduzir
             // 
-            this.cmbAba.FormattingEnabled = true;
-            this.cmbAba.Location = new System.Drawing.Point(108, 63);
-            this.cmbAba.Name = "cmbAba";
-            this.cmbAba.Size = new System.Drawing.Size(240, 21);
-            this.cmbAba.TabIndex = 0;
+            this.btn_traduzir.FormattingEnabled = true;
+            this.btn_traduzir.Location = new System.Drawing.Point(108, 63);
+            this.btn_traduzir.Name = "btn_traduzir";
+            this.btn_traduzir.Size = new System.Drawing.Size(240, 21);
+            this.btn_traduzir.TabIndex = 0;
             // 
             // dgvRegistros
             // 
@@ -127,9 +124,12 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvRegistros.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvRegistros.Size = new System.Drawing.Size(980, 252);
+            this.dgvRegistros.Size = new System.Drawing.Size(980, 255);
             this.dgvRegistros.TabIndex = 1;
             this.dgvRegistros.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dgvRegistros.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dgvRegistros.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvRegistros_CellFormatting);
+            this.dgvRegistros.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellClick);
             // 
             // btnLer
             // 
@@ -159,7 +159,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(552, 125);
+            this.button1.Location = new System.Drawing.Point(552, 88);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(188, 23);
             this.button1.TabIndex = 15;
@@ -210,6 +210,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.buttonOpenFile);
             this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(398, 0);
@@ -221,7 +222,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cmbAba);
+            this.groupBox1.Controls.Add(this.btn_traduzir);
             this.groupBox1.Controls.Add(this.btnLer);
             this.groupBox1.Controls.Add(this.cmbArquivo);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -282,11 +283,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.panel6);
-            this.groupBox2.Controls.Add(this.panel5);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.comboBox2);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Controls.Add(this.panel4);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel1);
             this.groupBox2.Controls.Add(this.dgvRegistros);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
@@ -296,78 +295,32 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Planilha de erros e melhorias";
             // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.SystemColors.Control;
-            this.panel6.Controls.Add(this.btn_Traduzir_NoteRossi);
-            this.panel6.Controls.Add(this.richTextBox4);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel6.Location = new System.Drawing.Point(533, 268);
-            this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(10);
-            this.panel6.Size = new System.Drawing.Size(230, 247);
-            this.panel6.TabIndex = 7;
-            // 
-            // btn_Traduzir_NoteRossi
-            // 
-            this.btn_Traduzir_NoteRossi.Location = new System.Drawing.Point(185, 10);
-            this.btn_Traduzir_NoteRossi.Name = "btn_Traduzir_NoteRossi";
-            this.btn_Traduzir_NoteRossi.Size = new System.Drawing.Size(35, 20);
-            this.btn_Traduzir_NoteRossi.TabIndex = 9;
-            this.btn_Traduzir_NoteRossi.Text = "汉A";
-            this.toolTip1.SetToolTip(this.btn_Traduzir_NoteRossi, "Traduzir");
-            this.btn_Traduzir_NoteRossi.UseVisualStyleBackColor = true;
-            this.btn_Traduzir_NoteRossi.Click += new System.EventHandler(this.btn_Traduzir_NoteRossi_Click);
-            // 
             // richTextBox4
             // 
             this.richTextBox4.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.richTextBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox4.Location = new System.Drawing.Point(10, 10);
+            this.richTextBox4.Location = new System.Drawing.Point(222, 3);
             this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(210, 227);
+            this.richTextBox4.Size = new System.Drawing.Size(213, 238);
             this.richTextBox4.TabIndex = 1;
             this.richTextBox4.Text = "";
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.SystemColors.Control;
-            this.panel5.Controls.Add(this.btn_Traduzir_NoteFaac);
-            this.panel5.Controls.Add(this.richTextBox3);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(303, 268);
-            this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(10);
-            this.panel5.Size = new System.Drawing.Size(230, 247);
-            this.panel5.TabIndex = 6;
-            // 
-            // btn_Traduzir_NoteFaac
-            // 
-            this.btn_Traduzir_NoteFaac.Location = new System.Drawing.Point(185, 10);
-            this.btn_Traduzir_NoteFaac.Name = "btn_Traduzir_NoteFaac";
-            this.btn_Traduzir_NoteFaac.Size = new System.Drawing.Size(35, 20);
-            this.btn_Traduzir_NoteFaac.TabIndex = 8;
-            this.btn_Traduzir_NoteFaac.Text = "汉A";
-            this.toolTip1.SetToolTip(this.btn_Traduzir_NoteFaac, "Traduzir");
-            this.btn_Traduzir_NoteFaac.UseVisualStyleBackColor = true;
-            this.btn_Traduzir_NoteFaac.Click += new System.EventHandler(this.btn_Traduzir_NoteFaac_Click);
             // 
             // richTextBox3
             // 
             this.richTextBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox3.Location = new System.Drawing.Point(10, 10);
+            this.richTextBox3.Location = new System.Drawing.Point(3, 3);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(210, 227);
+            this.richTextBox3.Size = new System.Drawing.Size(213, 238);
             this.richTextBox3.TabIndex = 0;
             this.richTextBox3.Text = "";
             // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(794, 484);
+            this.button2.Location = new System.Drawing.Point(11, 204);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(180, 23);
             this.button2.TabIndex = 5;
@@ -385,77 +338,32 @@
             "WAITNG RELEASE",
             "NS",
             "NO ACTION"});
-            this.comboBox2.Location = new System.Drawing.Point(794, 457);
+            this.comboBox2.Location = new System.Drawing.Point(11, 173);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(180, 21);
             this.comboBox2.TabIndex = 4;
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.Control;
-            this.panel4.Controls.Add(this.btn_Traduzir_CorrectTerm);
-            this.panel4.Controls.Add(this.richTextBox2);
-            this.panel4.Controls.Add(this.panel7);
-            this.panel4.Controls.Add(this.btn_Traduzir_FoundError);
-            this.panel4.Controls.Add(this.richTextBox1);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(3, 268);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(10);
-            this.panel4.Size = new System.Drawing.Size(300, 247);
-            this.panel4.TabIndex = 3;
-            // 
-            // btn_Traduzir_CorrectTerm
-            // 
-            this.btn_Traduzir_CorrectTerm.Location = new System.Drawing.Point(255, 137);
-            this.btn_Traduzir_CorrectTerm.Name = "btn_Traduzir_CorrectTerm";
-            this.btn_Traduzir_CorrectTerm.Size = new System.Drawing.Size(35, 20);
-            this.btn_Traduzir_CorrectTerm.TabIndex = 7;
-            this.btn_Traduzir_CorrectTerm.Text = "汉A";
-            this.toolTip1.SetToolTip(this.btn_Traduzir_CorrectTerm, "Traduzir");
-            this.btn_Traduzir_CorrectTerm.UseVisualStyleBackColor = true;
-            this.btn_Traduzir_CorrectTerm.Click += new System.EventHandler(this.btn_Traduzir_CorrectTerm_Click);
             // 
             // richTextBox2
             // 
             this.richTextBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(10, 137);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(20);
+            this.richTextBox2.Location = new System.Drawing.Point(2, 124);
+            this.richTextBox2.Margin = new System.Windows.Forms.Padding(2, 2, 0, 5);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(280, 100);
+            this.richTextBox2.Size = new System.Drawing.Size(340, 115);
             this.richTextBox2.TabIndex = 6;
             this.richTextBox2.Text = "";
-            // 
-            // panel7
-            // 
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(10, 132);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(280, 5);
-            this.panel7.TabIndex = 5;
-            // 
-            // btn_Traduzir_FoundError
-            // 
-            this.btn_Traduzir_FoundError.Location = new System.Drawing.Point(255, 10);
-            this.btn_Traduzir_FoundError.Name = "btn_Traduzir_FoundError";
-            this.btn_Traduzir_FoundError.Size = new System.Drawing.Size(35, 20);
-            this.btn_Traduzir_FoundError.TabIndex = 4;
-            this.btn_Traduzir_FoundError.Text = "汉A";
-            this.toolTip1.SetToolTip(this.btn_Traduzir_FoundError, "Traduzir");
-            this.btn_Traduzir_FoundError.UseVisualStyleBackColor = true;
-            this.btn_Traduzir_FoundError.Click += new System.EventHandler(this.btn_Traduzir_FoundError_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.richTextBox1.Location = new System.Drawing.Point(10, 10);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(20);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(2, 5);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 5, 0, 2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(280, 122);
+            this.richTextBox1.Size = new System.Drawing.Size(340, 115);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -485,6 +393,71 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // buttonOpenFile
+            // 
+            this.buttonOpenFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOpenFile.Location = new System.Drawing.Point(552, 118);
+            this.buttonOpenFile.Name = "buttonOpenFile";
+            this.buttonOpenFile.Size = new System.Drawing.Size(188, 23);
+            this.buttonOpenFile.TabIndex = 16;
+            this.buttonOpenFile.Text = "Abrir arquivo";
+            this.buttonOpenFile.UseVisualStyleBackColor = true;
+            this.buttonOpenFile.Click += new System.EventHandler(this.buttonOpenFile_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 271);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(342, 244);
+            this.tableLayoutPanel1.TabIndex = 6;
+            // 
+            // button_traduzir
+            // 
+            this.button_traduzir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_traduzir.Location = new System.Drawing.Point(11, 6);
+            this.button_traduzir.Name = "button_traduzir";
+            this.button_traduzir.Size = new System.Drawing.Size(180, 23);
+            this.button_traduzir.TabIndex = 10;
+            this.button_traduzir.Text = "Traduzir";
+            this.button_traduzir.UseVisualStyleBackColor = true;
+            this.button_traduzir.Click += new System.EventHandler(this.button_traduzir_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.button_traduzir);
+            this.panel4.Controls.Add(this.comboBox2);
+            this.panel4.Controls.Add(this.button2);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(783, 271);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 244);
+            this.panel4.TabIndex = 12;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.richTextBox3, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.richTextBox4, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(345, 271);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(438, 244);
+            this.tableLayoutPanel3.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,9 +469,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Simply Conect Change";
+            this.Text = "Simply Connect Change";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgExcel)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -512,12 +486,12 @@
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -525,7 +499,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbAba;
+        private System.Windows.Forms.ComboBox btn_traduzir;
         private System.Windows.Forms.DataGridView dgvRegistros;
         private System.Windows.Forms.Button btnLer;
         private System.Windows.Forms.PictureBox imgExcel;
@@ -546,21 +520,18 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.RichTextBox richTextBox4;
         private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.Button btn_Traduzir_FoundError;
         private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button btn_Traduzir_NoteRossi;
-        private System.Windows.Forms.Button btn_Traduzir_NoteFaac;
-        private System.Windows.Forms.Button btn_Traduzir_CorrectTerm;
+        private System.Windows.Forms.Button buttonOpenFile;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button button_traduzir;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     }
 }
 

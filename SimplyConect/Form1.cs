@@ -35,8 +35,8 @@ namespace SimplyConect
             InitializeComponent();
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
-            cmbAba.Items.AddRange(new[] { "Errors", "Improvements" });
-            cmbAba.SelectedIndex = 0;
+            btn_traduzir.Items.AddRange(new[] { "Errors", "Improvements" });
+            btn_traduzir.SelectedIndex = 0;
         }
 
         private void btnLer_Click(object sender, EventArgs e)
@@ -48,14 +48,14 @@ namespace SimplyConect
         {
             try
             {
-                if (cmbArquivo.SelectedItem == null || cmbAba.SelectedItem == null)
+                if (cmbArquivo.SelectedItem == null || btn_traduzir.SelectedItem == null)
                 {
                     MessageBox.Show("Selecione um arquivo e uma aba antes de continuar.");
                     return;
                 }
 
                 caminhoPlanilha = Path.Combine(pathPlanilha, cmbArquivo.SelectedItem.ToString());
-                string aba = cmbAba.SelectedItem.ToString();
+                string aba = btn_traduzir.SelectedItem.ToString();
                 registros.Clear();
 
                 using (var package = new ExcelPackage(new FileInfo(caminhoPlanilha)))
@@ -90,6 +90,11 @@ namespace SimplyConect
 
                 dgvRegistros.DataSource = null;
                 dgvRegistros.DataSource = registros;
+
+                for (int i = 0; i < dgvRegistros.Columns.Count; i++)
+                {
+                    dgvRegistros.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                }          
             }
             catch (Exception ex)
             {
@@ -121,7 +126,7 @@ namespace SimplyConect
             if (e.RowIndex < 0) return; // Ignora cabeçalho
 
             int linhaExcel = e.RowIndex + 3; // Considerando que a linha 0 do DataGridView é a linha 3 da planilha
-            string aba = cmbAba.SelectedItem.ToString();
+            string aba = btn_traduzir.SelectedItem.ToString();
 
             using (var package = new ExcelPackage(new FileInfo(caminhoPlanilha)))
             {
@@ -212,8 +217,8 @@ namespace SimplyConect
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string nomefile = cmbArquivo.SelectedItem.ToString() + " - ERRORS AND IMPROVEMENTS.xlsx";
-            cadastro cadastro = new cadastro(cmbAba.SelectedItem.ToString(), caminhoPlanilha, nomefile);
+            string nomefile = cmbArquivo.SelectedItem.ToString();
+            cadastro cadastro = new cadastro(btn_traduzir.SelectedItem.ToString(), caminhoPlanilha, nomefile);
             cadastro.Show();
         }
 
@@ -277,7 +282,7 @@ namespace SimplyConect
             }
         }
 
-        private async void btn_Traduzir_FoundError_Click(object sender, EventArgs e)
+        private async void Traduzir_FoundError_Click()
         {
             string textTraduzido = await ExtrairTraducao(textFoundError);
 
@@ -287,7 +292,7 @@ namespace SimplyConect
             richTextBox1.AppendText($"📌 {textTraduzido}\n\n");
         }
 
-        private async void btn_Traduzir_CorrectTerm_Click(object sender, EventArgs e)
+        private async void Traduzir_CorrectTerm_Click()
         {
             string textTraduzido = await ExtrairTraducao(textCorrectTerm);
 
@@ -297,7 +302,7 @@ namespace SimplyConect
             richTextBox2.AppendText($"📌 {textTraduzido}\n\n");
         }
 
-        private async void btn_Traduzir_NoteFaac_Click(object sender, EventArgs e)
+        private async void Traduzir_NoteFaac_Click()
         {
             string textTraduzido = await ExtrairTraducao(textNoteFaac);
 
@@ -307,7 +312,7 @@ namespace SimplyConect
             richTextBox3.AppendText($"📌 {textTraduzido}\n\n");
         }
 
-        private async void btn_Traduzir_NoteRossi_Click(object sender, EventArgs e)
+        private async void Traduzir_NoteRossi_Click()
         {
             string textTraduzido = await ExtrairTraducao(textNoteRossi);
 
@@ -321,6 +326,91 @@ namespace SimplyConect
         {
             Config config = new Config();
             config.ShowDialog();
+        }
+
+        private void buttonOpenFile_Click(object sender, EventArgs e)
+        {
+            string caminhoArquivo = caminhoPlanilha;
+
+            if (File.Exists(caminhoArquivo))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = caminhoArquivo,
+                    UseShellExecute = true
+                });
+            }
+            else
+            {
+                Console.WriteLine("Arquivo não encontrado: " + caminhoArquivo);
+            }
+        }
+
+        private void button_traduzir_Click(object sender, EventArgs e)
+        {
+            Traduzir_FoundError_Click();
+            Traduzir_CorrectTerm_Click();
+            Traduzir_NoteFaac_Click();
+            Traduzir_NoteRossi_Click();
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (this.Height > 1000)
+            {
+                dgvRegistros.Height = 400; // Margem superior e inferior
+            }
+            else
+            {
+                dgvRegistros.Height = 255;
+            }
+        }
+
+        private void dgvRegistros_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Verifica se é a 8ª coluna (índice 7)
+            if (e.ColumnIndex == 7 && e.Value != null)
+            {
+                string valor = e.Value.ToString().ToUpper();
+
+                switch (valor)
+                {
+                    case "OK":
+                        e.CellStyle.BackColor = Color.LightGreen;
+                        e.CellStyle.ForeColor = Color.Black;
+                        break;
+
+                    case "NS":
+                        e.CellStyle.BackColor = Color.Red;
+                        e.CellStyle.ForeColor = Color.White;
+                        break;
+
+                    case "WORK IN PROGRESS":
+                        e.CellStyle.BackColor = Color.BurlyWood;
+                        e.CellStyle.ForeColor = Color.Black;
+                        break;
+
+                    case "NO ACTION":
+                        e.CellStyle.BackColor = Color.LightGray;
+                        e.CellStyle.ForeColor = Color.Black;
+                        break;
+
+                    case "WAITING RELEASE":
+                        e.CellStyle.BackColor = Color.LightBlue;
+                        e.CellStyle.ForeColor = Color.Black;
+                        break;
+
+                    default:
+                        e.CellStyle.BackColor = dgvRegistros.DefaultCellStyle.BackColor;
+                        e.CellStyle.ForeColor = dgvRegistros.DefaultCellStyle.ForeColor;
+                        break;
+                }
+            }
         }
     }
 

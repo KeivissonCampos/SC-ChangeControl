@@ -31,6 +31,8 @@ namespace SimplyConect
         string filePath = "";
         string nomefile = "";
 
+        bool formatImage;
+
         public cadastro(string _cmbAba, string _filePath, string _nomefile)
         {
             InitializeComponent();
@@ -51,6 +53,8 @@ namespace SimplyConect
 
             string aba = cmbAba.ToString();
             bool registroAdicionado = false;
+            int larguraImagem;
+            int alturaImagem;
 
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
@@ -86,15 +90,31 @@ namespace SimplyConect
                                 int larguraCelula2 = 60;
 
                                 // Tamanho da imagem
-                                int larguraImagem = 245;
-                                int alturaImagem = 260;
+                                if (formatImage)
+                                {
+                                    larguraImagem = 360;
+                                    alturaImagem = 145;
+                                }
+                                else
+                                {
+                                    larguraImagem = 245;
+                                    alturaImagem = 260;
+                                }
 
                                 // Calcula os deslocamentos para centralizar a imagem
                                 int deslocamentoHorizontal = (larguraCelula - larguraImagem) / 2;
                                 int deslocamentoVertical = (alturaCelula - alturaImagem) / 2;
 
                                 picture.SetPosition(row - 1, deslocamentoVertical, 1, deslocamentoHorizontal);
-                                picture.SetSize(220, 350);
+                                
+                                if (formatImage)
+                                {
+                                    picture.SetSize(350, 200);
+                                }
+                                else
+                                {
+                                    picture.SetSize(220, 350);
+                                }
 
                                 sheet.Row(row).Height = alturaCelula;
                                 sheet.Column(2).Width = larguraCelula2;
@@ -193,9 +213,22 @@ namespace SimplyConect
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 imagemSelecionada = File.ReadAllBytes(ofd.FileName);
-                picImagem.Image = System.Drawing.Image.FromFile(ofd.FileName);
+                Image imagem = Image.FromFile(ofd.FileName);
+                picImagem.Image = imagem;
+
+                if (imagem.Width > imagem.Height)
+                {
+                    //MessageBox.Show("A imagem está em formato paisagem.");
+                    formatImage = true;
+                }
+                else
+                {
+                    formatImage = false;
+                    //MessageBox.Show("A imagem está em formato retrato.");
+                }
             }
         }
+
 
         void dataForm()
         {
