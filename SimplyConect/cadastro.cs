@@ -33,13 +33,16 @@ namespace SimplyConect
 
         bool formatImage;
 
-        public cadastro(string _cmbAba, string _filePath, string _nomefile)
+        Form1 form1Principal;
+
+        public cadastro(string _cmbAba, string _filePath, string _nomefile, Form1 formPrincipal)
         {
             InitializeComponent();
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             cmbAba = _cmbAba;
             filePath = _filePath;
             nomefile = _nomefile;
+            this.form1Principal = formPrincipal;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -67,8 +70,10 @@ namespace SimplyConect
 
                     // Se número do erro existe e campos estão vazios
                     if (!string.IsNullOrWhiteSpace(numErro) &&
-                        string.IsNullOrWhiteSpace(sheet.Cells[row, 3].Text) && // Plataforma
-                        string.IsNullOrWhiteSpace(sheet.Cells[row, 4].Text))   // Ambiente
+                        string.IsNullOrWhiteSpace(sheet.Cells[row, 3].Text) &&
+                        string.IsNullOrWhiteSpace(sheet.Cells[row, 4].Text) &&
+                        string.IsNullOrWhiteSpace(sheet.Cells[row, 5].Text) &&
+                        string.IsNullOrWhiteSpace(sheet.Cells[row, 6].Text))
                     {
                         sheet.Cells[row, 3].Value = cellWhere;
                         sheet.Cells[row, 4].Value = cellEnvironment;
@@ -169,6 +174,7 @@ namespace SimplyConect
                     MessageBox.Show("Nenhuma linha disponível para completar.");
                 }
             }
+            form1Principal.AtualizaDataGridView();
         }
 
         private bool IsExcelFileOpen(string filePath)
