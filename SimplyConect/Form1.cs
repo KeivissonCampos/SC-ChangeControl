@@ -30,32 +30,40 @@ namespace SimplyConect
 
         string pathPlanilha;
 
+        string idiomaOrigem;
+        string idiomaDestino;
+
+        bool formatImage;
+        bool imgAlterada;
+
         public Form1()
         {
             InitializeComponent();
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
-            btn_traduzir.Items.AddRange(new[] { "Errors", "Improvements" });
-            btn_traduzir.SelectedIndex = 0;
+            btn_aba.Items.AddRange(new[] { "Errors", "Improvements" });
+            btn_aba.SelectedIndex = 0;
         }
 
         private void btnLer_Click(object sender, EventArgs e)
         {
             ReadPath();
             AtualizaDataGridView();
+            dgvRegistros.Focus();
+
         }
-        void AtualizaDataGridView()
+        public void AtualizaDataGridView()
         {
             try
             {
-                if (cmbArquivo.SelectedItem == null || btn_traduzir.SelectedItem == null)
+                if (cmbArquivo.SelectedItem == null || btn_aba.SelectedItem == null)
                 {
                     MessageBox.Show("Selecione um arquivo e uma aba antes de continuar.");
                     return;
                 }
 
                 caminhoPlanilha = Path.Combine(pathPlanilha, cmbArquivo.SelectedItem.ToString());
-                string aba = btn_traduzir.SelectedItem.ToString();
+                string aba = btn_aba.SelectedItem.ToString();
                 registros.Clear();
 
                 using (var package = new ExcelPackage(new FileInfo(caminhoPlanilha)))
@@ -94,13 +102,28 @@ namespace SimplyConect
                 for (int i = 0; i < dgvRegistros.Columns.Count; i++)
                 {
                     dgvRegistros.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }          
+                }
+                dgvRegistros.Columns[0].Width = 40;
+                dgvRegistros.Columns[1].Width = 100;
+                dgvRegistros.Columns[2].Width = 100;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao atualizar a planilha:\n" + ex.Message,
                                 "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            if (dgvRegistros.Rows.Count > 0)
+            {
+                dgvRegistros.ClearSelection();
+                dgvRegistros.Rows[0].Selected = true;
+                dgvRegistros.CurrentCell = dgvRegistros.Rows[0].Cells[0];
+
+                // Simula o clique para carregar os dados nos RichTextBoxes
+                dataGridView1_CellClick(this, new DataGridViewCellEventArgs(0, 0));
+            }
+
+            imgAlterada = false;
         }
 
         void CarregarArquivosNoComboBox()
@@ -126,7 +149,7 @@ namespace SimplyConect
             if (e.RowIndex < 0) return; // Ignora cabeçalho
 
             int linhaExcel = e.RowIndex + 3; // Considerando que a linha 0 do DataGridView é a linha 3 da planilha
-            string aba = btn_traduzir.SelectedItem.ToString();
+            string aba = btn_aba.SelectedItem.ToString();
 
             using (var package = new ExcelPackage(new FileInfo(caminhoPlanilha)))
             {
@@ -160,6 +183,11 @@ namespace SimplyConect
             richTextBox4.AppendText("📖 ROSSI NOTES:\n\n");
             textNoteRossi = row.Cells["NoteRossi"].Value?.ToString();
             richTextBox4.AppendText($"📌 {textNoteRossi}\n\n");
+
+            comboBox_status.Text = row.Cells["Status"].Value?.ToString();
+            comboBox_plataforma.Text = row.Cells["Plataforma"].Value?.ToString();
+            comboBox_ambiente.Text = row.Cells["Ambiente"].Value?.ToString();
+            comboBox_prioridade.Text = row.Cells["Prioridade"].Value?.ToString();
         }
 
         private Image ObterImagemDaLinha(ExcelWorksheet sheet, int linha)
@@ -218,7 +246,7 @@ namespace SimplyConect
         private void button1_Click(object sender, EventArgs e)
         {
             string nomefile = cmbArquivo.SelectedItem.ToString();
-            cadastro cadastro = new cadastro(btn_traduzir.SelectedItem.ToString(), caminhoPlanilha, nomefile);
+            cadastro cadastro = new cadastro(btn_aba.SelectedItem.ToString(), caminhoPlanilha, nomefile, this);
             cadastro.Show();
         }
 
@@ -241,8 +269,6 @@ namespace SimplyConect
 
         private async Task<string> ExtrairTraducao(string text)
         {
-            string idiomaOrigem = "en";
-            string idiomaDestino = "pt";
             string traducao = "";
 
             string url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={idiomaOrigem}&tl={idiomaDestino}&dt=t&q={Uri.EscapeDataString(text)}";
@@ -348,6 +374,19 @@ namespace SimplyConect
 
         private void button_traduzir_Click(object sender, EventArgs e)
         {
+            idiomaOrigem = "en";
+            idiomaDestino = "pt-br";
+
+            Traduzir_FoundError_Click();
+            Traduzir_CorrectTerm_Click();
+            Traduzir_NoteFaac_Click();
+            Traduzir_NoteRossi_Click();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            idiomaOrigem = "pt-br";
+            idiomaDestino = "en";
+
             Traduzir_FoundError_Click();
             Traduzir_CorrectTerm_Click();
             Traduzir_NoteFaac_Click();
@@ -381,13 +420,18 @@ namespace SimplyConect
                 switch (valor)
                 {
                     case "OK":
-                        e.CellStyle.BackColor = Color.LightGreen;
+                        e.CellStyle.BackColor = Color.MediumSeaGreen;
                         e.CellStyle.ForeColor = Color.Black;
                         break;
 
                     case "NS":
                         e.CellStyle.BackColor = Color.Red;
                         e.CellStyle.ForeColor = Color.White;
+                        break;
+
+                    case "TO BE TESTED":
+                        e.CellStyle.BackColor = Color.PaleGreen;
+                        e.CellStyle.ForeColor = Color.Black;
                         break;
 
                     case "WORK IN PROGRESS":
@@ -409,6 +453,201 @@ namespace SimplyConect
                         e.CellStyle.BackColor = dgvRegistros.DefaultCellStyle.BackColor;
                         e.CellStyle.ForeColor = dgvRegistros.DefaultCellStyle.ForeColor;
                         break;
+                }
+            }
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            if (dgvRegistros.CurrentRow == null)
+            {
+                MessageBox.Show("Selecione uma linha no DataGridView.");
+                return;
+            }
+
+            // Confirmação antes de alterar
+            DialogResult confirmResult = MessageBox.Show(
+                "Deseja realmente atualizar esta linha na planilha com as novas informações?",
+                "Confirmação de Atualização",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                return; // Usuário cancelou
+            }
+
+            try
+            {
+                int linhaSelecionada = dgvRegistros.CurrentRow.Index;
+                int linhaExcel = linhaSelecionada + 3; // Ajusta para a linha real da planilha
+                string aba = btn_aba.SelectedItem.ToString();
+
+                using (var package = new ExcelPackage(new FileInfo(caminhoPlanilha)))
+                {
+                    var sheet = package.Workbook.Worksheets[aba];
+                    if (sheet == null)
+                    {
+                        MessageBox.Show($"A aba '{aba}' não foi encontrada.");
+                        return;
+                    }
+
+                    // Remove prefixos dos textos e atualiza as células
+                    sheet.Cells[linhaExcel, 5].Value = richTextBox1.Text.Replace("📖 Found Error:\n\n📌 ", "").Trim();
+                    sheet.Cells[linhaExcel, 6].Value = richTextBox2.Text.Replace("📖 Correct Term:\n\n📌 ", "").Trim();
+                    //sheet.Cells[linhaExcel, 10].Value = richTextBox3.Text.Replace("📖 FAAC NOTES:\n\n📌 ", "").Trim();
+                    sheet.Cells[linhaExcel, 11].Value = richTextBox4.Text.Replace("📖 ROSSI NOTES:\n\n📌 ", "").Trim();
+                    sheet.Cells[linhaExcel, 9].Value = comboBox_status.SelectedItem?.ToString() ?? "";
+                    sheet.Cells[linhaExcel, 3].Value = comboBox_plataforma.SelectedItem?.ToString() ?? "";
+                    sheet.Cells[linhaExcel, 4].Value = comboBox_ambiente.SelectedItem?.ToString() ?? "";
+                    sheet.Cells[linhaExcel, 7].Value = comboBox_prioridade.SelectedItem?.ToString() ?? "";
+
+                    if (imgAlterada)
+                    {
+                        int larguraImagem;
+                        int alturaImagem;
+
+                        string nomeImagem = $"img_{linhaExcel}";
+
+                        // Remove qualquer imagem com esse nome (caso exista)
+                        var imagensARemover = sheet.Drawings
+                            .Where(d => d.Name == nomeImagem)
+                            .ToList();
+
+                        foreach (var img in imagensARemover)
+                        {
+                            sheet.Drawings.Remove(img);
+                        }
+
+                        var picture = sheet.Drawings.AddPicture(nomeImagem, new MemoryStream(imagemSelecionada));
+
+                        int alturaCelula = 280;
+                        int larguraCelula = 425;
+                        int larguraCelula2 = 60;
+
+                        // Tamanho da imagem
+                        if (formatImage)
+                        {
+                            larguraImagem = 360;
+                            alturaImagem = 145;
+                        }
+                        else
+                        {
+                            larguraImagem = 245;
+                            alturaImagem = 260;
+                        }
+
+                        // Calcula os deslocamentos para centralizar a imagem
+                        int deslocamentoHorizontal = (larguraCelula - larguraImagem) / 2;
+                        int deslocamentoVertical = (alturaCelula - alturaImagem) / 2;
+
+                        picture.SetPosition(linhaExcel - 1, deslocamentoVertical, 1, deslocamentoHorizontal);
+
+                        if (formatImage)
+                        {
+                            picture.SetSize(350, 200);
+                        }
+                        else
+                        {
+                            picture.SetSize(220, 350);
+                        }
+
+                        sheet.Row(linhaExcel).Height = alturaCelula;
+                        sheet.Column(2).Width = larguraCelula2;
+                    }
+
+                    package.Save();
+                }
+
+                MessageBox.Show("Planilha atualizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AtualizaDataGridView(); // Atualiza a interface
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao atualizar a planilha:\n" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            dgvRegistros.Focus();
+        }
+
+        private void button_AlterarImagem_Click(object sender, EventArgs e)
+        {
+            /*if (dgvRegistros.CurrentRow == null)
+            {
+                MessageBox.Show("Selecione uma linha para alterar a imagem.");
+                return;
+            }
+
+            int rowIndex = dgvRegistros.SelectedRows[0].Index + 3; // +3 porque a planilha começa na linha 3
+            string aba = btn_aba.SelectedItem.ToString(); // Ajuste se for necessário obter a aba de outro lugar
+            string filePath = caminhoPlanilha; // Ajuste para usar sua variável correta
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Imagens|*.png;*.jpg;*.jpeg";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                byte[] novaImagem = File.ReadAllBytes(ofd.FileName);
+                Image imagem = Image.FromFile(ofd.FileName);
+                bool imagemPaisagem = imagem.Width > imagem.Height;
+
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    var sheet = package.Workbook.Worksheets[aba];
+
+                    string nomeImagem = $"img_{rowIndex}";
+
+                    // Remove qualquer imagem com esse nome (caso exista)
+                    var imagensARemover = sheet.Drawings
+                        .Where(d => d.Name == nomeImagem)
+                        .ToList();
+
+                    foreach (var img in imagensARemover)
+                    {
+                        sheet.Drawings.Remove(img);
+                    }
+
+                    var picture = sheet.Drawings.AddPicture(nomeImagem, new MemoryStream(novaImagem));
+
+                    int alturaCelula = 280;
+                    int larguraCelula = 425;
+                    int larguraImagem = imagemPaisagem ? 360 : 245;
+                    int alturaImagem = imagemPaisagem ? 145 : 260;
+
+                    int deslocamentoH = (larguraCelula - larguraImagem) / 2;
+                    int deslocamentoV = (alturaCelula - alturaImagem) / 2;
+
+                    picture.SetPosition(rowIndex - 1, deslocamentoV, 1, deslocamentoH);
+                    picture.SetSize(imagemPaisagem ? 350 : 220, imagemPaisagem ? 200 : 350);
+                    sheet.Row(rowIndex).Height = alturaCelula;
+                    sheet.Column(2).Width = 60;
+
+                    package.Save();
+                }
+
+                MessageBox.Show("Imagem alterada com sucesso.");
+                AtualizaDataGridView();
+            }
+        }**/
+            imgAlterada = true;
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Imagens|*.png;*.jpg;*.jpeg";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                imagemSelecionada = File.ReadAllBytes(ofd.FileName);
+                Image imagem = Image.FromFile(ofd.FileName);
+                imgExcel.Image = imagem;
+
+                if (imagem.Width > imagem.Height)
+                {
+                    //MessageBox.Show("A imagem está em formato paisagem.");
+                    formatImage = true;
+                }
+                else
+                {
+                    formatImage = false;
+                    //MessageBox.Show("A imagem está em formato retrato.");
                 }
             }
         }
