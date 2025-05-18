@@ -372,20 +372,22 @@ namespace SimplyConect
             }
         }
 
-        private void button_traduzir_Click(object sender, EventArgs e)
+        private void button_ENtoPT_Click(object sender, EventArgs e)
         {
-            idiomaOrigem = "en";
-            idiomaDestino = "pt-br";
+            idiomaOrigem = "pt-br";
+            idiomaDestino = "en";
 
             Traduzir_FoundError_Click();
             Traduzir_CorrectTerm_Click();
             Traduzir_NoteFaac_Click();
             Traduzir_NoteRossi_Click();
+
         }
-        private void button2_Click(object sender, EventArgs e)
+
+        private void button_PTtoEN_Click(object sender, EventArgs e)
         {
-            idiomaOrigem = "pt-br";
-            idiomaDestino = "en";
+            idiomaOrigem = "en";
+            idiomaDestino = "pt-br";
 
             Traduzir_FoundError_Click();
             Traduzir_CorrectTerm_Click();
@@ -494,10 +496,30 @@ namespace SimplyConect
                     }
 
                     // Remove prefixos dos textos e atualiza as células
-                    sheet.Cells[linhaExcel, 5].Value = richTextBox1.Text.Replace("📖 Found Error:\n\n📌 ", "").Trim();
-                    sheet.Cells[linhaExcel, 6].Value = richTextBox2.Text.Replace("📖 Correct Term:\n\n📌 ", "").Trim();
-                    //sheet.Cells[linhaExcel, 10].Value = richTextBox3.Text.Replace("📖 FAAC NOTES:\n\n📌 ", "").Trim();
-                    sheet.Cells[linhaExcel, 11].Value = richTextBox4.Text.Replace("📖 ROSSI NOTES:\n\n📌 ", "").Trim();
+                    if (richTextBox1.Text.IndexOf("📌") >= 0)
+                    {
+                        sheet.Cells[linhaExcel, 5].Value = richTextBox1.Text.Substring(richTextBox1.Text.IndexOf("📌") + 2).Trim();
+                    }
+                    else
+                    {
+                        sheet.Cells[linhaExcel, 5].Value = richTextBox1.Text.Trim(); // caso não tenha 📌
+                    }
+                    if (richTextBox2.Text.IndexOf("📌") >= 0)
+                    {
+                        sheet.Cells[linhaExcel, 6].Value = richTextBox2.Text.Substring(richTextBox2.Text.IndexOf("📌") + 2).Trim();
+                    }
+                    else
+                    {
+                        sheet.Cells[linhaExcel, 6].Value = richTextBox2.Text.Trim(); // caso não tenha 📌
+                    }
+                    if (richTextBox4.Text.IndexOf("📌") >= 0)
+                    {
+                        sheet.Cells[linhaExcel, 11].Value = richTextBox4.Text.Substring(richTextBox4.Text.IndexOf("📌") + 2).Trim();
+                    }
+                    else
+                    {
+                        sheet.Cells[linhaExcel, 11].Value = richTextBox4.Text.Trim(); // caso não tenha 📌
+                    }
                     sheet.Cells[linhaExcel, 9].Value = comboBox_status.SelectedItem?.ToString() ?? "";
                     sheet.Cells[linhaExcel, 3].Value = comboBox_plataforma.SelectedItem?.ToString() ?? "";
                     sheet.Cells[linhaExcel, 4].Value = comboBox_ambiente.SelectedItem?.ToString() ?? "";

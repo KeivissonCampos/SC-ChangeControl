@@ -56,6 +56,14 @@
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox_prioridade = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox_ambiente = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox_plataforma = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.button_traduzir = new System.Windows.Forms.Button();
             this.comboBox_status = new System.Windows.Forms.ComboBox();
             this.btn_update = new System.Windows.Forms.Button();
@@ -64,17 +72,11 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button_AlterarImagem = new System.Windows.Forms.Button();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox_plataforma = new System.Windows.Forms.ComboBox();
-            this.comboBox_ambiente = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox_prioridade = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button_AlterarImagem = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRegistros)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgExcel)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -93,6 +95,8 @@
             this.panel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_aba
@@ -152,10 +156,11 @@
             // 
             // imgExcel
             // 
-            this.imgExcel.Location = new System.Drawing.Point(20, 33);
+            this.imgExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imgExcel.Location = new System.Drawing.Point(0, 0);
             this.imgExcel.Margin = new System.Windows.Forms.Padding(20);
             this.imgExcel.Name = "imgExcel";
-            this.imgExcel.Size = new System.Drawing.Size(358, 389);
+            this.imgExcel.Size = new System.Drawing.Size(358, 420);
             this.imgExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgExcel.TabIndex = 14;
             this.imgExcel.TabStop = false;
@@ -370,6 +375,102 @@
             this.panel4.Size = new System.Drawing.Size(200, 244);
             this.panel4.TabIndex = 12;
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 158);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Status:";
+            // 
+            // comboBox_prioridade
+            // 
+            this.comboBox_prioridade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_prioridade.FormattingEnabled = true;
+            this.comboBox_prioridade.Items.AddRange(new object[] {
+            "Blocker",
+            "Critical",
+            "Major",
+            "Minor",
+            "Trivial"});
+            this.comboBox_prioridade.Location = new System.Drawing.Point(11, 134);
+            this.comboBox_prioridade.Name = "comboBox_prioridade";
+            this.comboBox_prioridade.Size = new System.Drawing.Size(180, 21);
+            this.comboBox_prioridade.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Prioridade:";
+            // 
+            // comboBox_ambiente
+            // 
+            this.comboBox_ambiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_ambiente.FormattingEnabled = true;
+            this.comboBox_ambiente.Items.AddRange(new object[] {
+            "PRODUCTION",
+            "SANDBOX",
+            "TEST",
+            "PRODUCTION/SANDBOX",
+            "PRODUCTION/TEST",
+            "SANDBOX/TEST",
+            "PRODUCTION/SANDBOX/TEST"});
+            this.comboBox_ambiente.Location = new System.Drawing.Point(11, 94);
+            this.comboBox_ambiente.Name = "comboBox_ambiente";
+            this.comboBox_ambiente.Size = new System.Drawing.Size(180, 21);
+            this.comboBox_ambiente.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(54, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Ambiente:";
+            // 
+            // comboBox_plataforma
+            // 
+            this.comboBox_plataforma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_plataforma.FormattingEnabled = true;
+            this.comboBox_plataforma.Items.AddRange(new object[] {
+            "ANDROID",
+            "IOS",
+            "ANDROID/IOS"});
+            this.comboBox_plataforma.Location = new System.Drawing.Point(11, 54);
+            this.comboBox_plataforma.Name = "comboBox_plataforma";
+            this.comboBox_plataforma.Size = new System.Drawing.Size(180, 21);
+            this.comboBox_plataforma.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Plataforma:";
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(103, 6);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(88, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Portuguese";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button_PTtoEN_Click);
+            // 
             // button_traduzir
             // 
             this.button_traduzir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -379,7 +480,7 @@
             this.button_traduzir.TabIndex = 10;
             this.button_traduzir.Text = "English";
             this.button_traduzir.UseVisualStyleBackColor = true;
-            this.button_traduzir.Click += new System.EventHandler(this.button_traduzir_Click);
+            this.button_traduzir.Click += new System.EventHandler(this.button_ENtoPT_Click);
             // 
             // comboBox_status
             // 
@@ -460,8 +561,8 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button_AlterarImagem);
-            this.groupBox3.Controls.Add(this.imgExcel);
+            this.groupBox3.Controls.Add(this.panel6);
+            this.groupBox3.Controls.Add(this.panel5);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
@@ -471,116 +572,38 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Imagem da celula";
             // 
+            // button_AlterarImagem
+            // 
+            this.button_AlterarImagem.Location = new System.Drawing.Point(115, 10);
+            this.button_AlterarImagem.Name = "button_AlterarImagem";
+            this.button_AlterarImagem.Size = new System.Drawing.Size(119, 25);
+            this.button_AlterarImagem.TabIndex = 15;
+            this.button_AlterarImagem.Text = "Alterar Imagem";
+            this.button_AlterarImagem.UseVisualStyleBackColor = true;
+            this.button_AlterarImagem.Click += new System.EventHandler(this.button_AlterarImagem_Click);
+            // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // button2
+            // panel5
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(103, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Portuguese";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.panel5.Controls.Add(this.button_AlterarImagem);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(20, 453);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(358, 45);
+            this.panel5.TabIndex = 16;
             // 
-            // label1
+            // panel6
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Plataforma:";
-            // 
-            // comboBox_plataforma
-            // 
-            this.comboBox_plataforma.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_plataforma.FormattingEnabled = true;
-            this.comboBox_plataforma.Items.AddRange(new object[] {
-            "ANDROID",
-            "IOS",
-            "ANDROID/IOS"});
-            this.comboBox_plataforma.Location = new System.Drawing.Point(11, 54);
-            this.comboBox_plataforma.Name = "comboBox_plataforma";
-            this.comboBox_plataforma.Size = new System.Drawing.Size(180, 21);
-            this.comboBox_plataforma.TabIndex = 13;
-            // 
-            // comboBox_ambiente
-            // 
-            this.comboBox_ambiente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_ambiente.FormattingEnabled = true;
-            this.comboBox_ambiente.Items.AddRange(new object[] {
-            "PRODUCTION",
-            "SANDBOX",
-            "TEST",
-            "PRODUCTION/SANDBOX",
-            "PRODUCTION/TEST",
-            "SANDBOX/TEST",
-            "PRODUCTION/SANDBOX/TEST"});
-            this.comboBox_ambiente.Location = new System.Drawing.Point(11, 94);
-            this.comboBox_ambiente.Name = "comboBox_ambiente";
-            this.comboBox_ambiente.Size = new System.Drawing.Size(180, 21);
-            this.comboBox_ambiente.TabIndex = 15;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Ambiente:";
-            // 
-            // comboBox_prioridade
-            // 
-            this.comboBox_prioridade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox_prioridade.FormattingEnabled = true;
-            this.comboBox_prioridade.Items.AddRange(new object[] {
-            "Blocker",
-            "Critical",
-            "Major",
-            "Minor",
-            "Trivial"});
-            this.comboBox_prioridade.Location = new System.Drawing.Point(11, 134);
-            this.comboBox_prioridade.Name = "comboBox_prioridade";
-            this.comboBox_prioridade.Size = new System.Drawing.Size(180, 21);
-            this.comboBox_prioridade.TabIndex = 17;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Prioridade:";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Status:";
-            // 
-            // button_AlterarImagem
-            // 
-            this.button_AlterarImagem.Location = new System.Drawing.Point(127, 463);
-            this.button_AlterarImagem.Name = "button_AlterarImagem";
-            this.button_AlterarImagem.Size = new System.Drawing.Size(119, 23);
-            this.button_AlterarImagem.TabIndex = 15;
-            this.button_AlterarImagem.Text = "Alterar Imagem";
-            this.button_AlterarImagem.UseVisualStyleBackColor = true;
-            this.button_AlterarImagem.Click += new System.EventHandler(this.button_AlterarImagem_Click);
+            this.panel6.Controls.Add(this.imgExcel);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(20, 33);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(358, 420);
+            this.panel6.TabIndex = 17;
             // 
             // Form1
             // 
@@ -617,6 +640,8 @@
             this.panel2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -666,6 +691,8 @@
         private System.Windows.Forms.ComboBox comboBox_plataforma;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_AlterarImagem;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel6;
     }
 }
 
