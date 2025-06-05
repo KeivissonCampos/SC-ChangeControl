@@ -36,6 +36,8 @@ namespace SimplyConect
         bool formatImage;
         bool imgAlterada;
 
+        List<int> position = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
         public Form1()
         {
             InitializeComponent();
@@ -82,15 +84,15 @@ namespace SimplyConect
                         registros.Add(new Registro
                         {
                             Numero = int.Parse(sheet.Cells[row, 1].Text),
-                            Plataforma = sheet.Cells[row, 3].Text,
-                            Ambiente = sheet.Cells[row, 4].Text,
-                            Descricao = sheet.Cells[row, 5].Text,
-                            Correcao = sheet.Cells[row, 6].Text,
-                            Prioridade = sheet.Cells[row, 7].Text,
-                            Solicitante = sheet.Cells[row, 8].Text,
-                            Status = sheet.Cells[row, 9].Text,
-                            NoteFaac = sheet.Cells[row, 10].Text,
-                            NoteRossi = sheet.Cells[row, 11].Text
+                            Plataforma = sheet.Cells[row, 5].Text,
+                            Ambiente = sheet.Cells[row, 6].Text,
+                            Descricao = sheet.Cells[row, 7].Text,
+                            Correcao = sheet.Cells[row, 8].Text,
+                            Prioridade = sheet.Cells[row, 9].Text,
+                            Solicitante = sheet.Cells[row, 10].Text,
+                            Status = sheet.Cells[row, 11].Text,
+                            NoteFaac = sheet.Cells[row, 12].Text,
+                            NoteRossi = sheet.Cells[row, 13].Text
                         });
                         row++;
                     }
@@ -498,32 +500,32 @@ namespace SimplyConect
                     // Remove prefixos dos textos e atualiza as células
                     if (richTextBox1.Text.IndexOf("📌") >= 0)
                     {
-                        sheet.Cells[linhaExcel, 5].Value = richTextBox1.Text.Substring(richTextBox1.Text.IndexOf("📌") + 2).Trim();
+                        sheet.Cells[linhaExcel, 7].Value = richTextBox1.Text.Substring(richTextBox1.Text.IndexOf("📌") + 2).Trim();
                     }
                     else
                     {
-                        sheet.Cells[linhaExcel, 5].Value = richTextBox1.Text.Trim(); // caso não tenha 📌
+                        sheet.Cells[linhaExcel, 7].Value = richTextBox1.Text.Trim(); // caso não tenha 📌
                     }
                     if (richTextBox2.Text.IndexOf("📌") >= 0)
                     {
-                        sheet.Cells[linhaExcel, 6].Value = richTextBox2.Text.Substring(richTextBox2.Text.IndexOf("📌") + 2).Trim();
+                        sheet.Cells[linhaExcel, 8].Value = richTextBox2.Text.Substring(richTextBox2.Text.IndexOf("📌") + 2).Trim();
                     }
                     else
                     {
-                        sheet.Cells[linhaExcel, 6].Value = richTextBox2.Text.Trim(); // caso não tenha 📌
+                        sheet.Cells[linhaExcel, 8].Value = richTextBox2.Text.Trim(); // caso não tenha 📌
                     }
                     if (richTextBox4.Text.IndexOf("📌") >= 0)
                     {
-                        sheet.Cells[linhaExcel, 11].Value = richTextBox4.Text.Substring(richTextBox4.Text.IndexOf("📌") + 2).Trim();
+                        sheet.Cells[linhaExcel, 13].Value = richTextBox4.Text.Substring(richTextBox4.Text.IndexOf("📌") + 2).Trim();
                     }
                     else
                     {
-                        sheet.Cells[linhaExcel, 11].Value = richTextBox4.Text.Trim(); // caso não tenha 📌
+                        sheet.Cells[linhaExcel, 13].Value = richTextBox4.Text.Trim(); // caso não tenha 📌
                     }
-                    sheet.Cells[linhaExcel, 9].Value = comboBox_status.SelectedItem?.ToString() ?? "";
-                    sheet.Cells[linhaExcel, 3].Value = comboBox_plataforma.SelectedItem?.ToString() ?? "";
-                    sheet.Cells[linhaExcel, 4].Value = comboBox_ambiente.SelectedItem?.ToString() ?? "";
-                    sheet.Cells[linhaExcel, 7].Value = comboBox_prioridade.SelectedItem?.ToString() ?? "";
+                    sheet.Cells[linhaExcel, 11].Value = comboBox_status.SelectedItem?.ToString() ?? "";
+                    sheet.Cells[linhaExcel, 5].Value = comboBox_plataforma.SelectedItem?.ToString() ?? "";
+                    sheet.Cells[linhaExcel, 6].Value = comboBox_ambiente.SelectedItem?.ToString() ?? "";
+                    sheet.Cells[linhaExcel, 9].Value = comboBox_prioridade.SelectedItem?.ToString() ?? "";
 
                     if (imgAlterada)
                     {

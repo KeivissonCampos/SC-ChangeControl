@@ -70,18 +70,18 @@ namespace SimplyConect
 
                     // Se número do erro existe e campos estão vazios
                     if (!string.IsNullOrWhiteSpace(numErro) &&
-                        string.IsNullOrWhiteSpace(sheet.Cells[row, 3].Text) &&
-                        string.IsNullOrWhiteSpace(sheet.Cells[row, 4].Text) &&
                         string.IsNullOrWhiteSpace(sheet.Cells[row, 5].Text) &&
-                        string.IsNullOrWhiteSpace(sheet.Cells[row, 6].Text))
+                        string.IsNullOrWhiteSpace(sheet.Cells[row, 6].Text) &&
+                        string.IsNullOrWhiteSpace(sheet.Cells[row, 7].Text) &&
+                        string.IsNullOrWhiteSpace(sheet.Cells[row, 8].Text))
                     {
-                        sheet.Cells[row, 3].Value = cellWhere;
-                        sheet.Cells[row, 4].Value = cellEnvironment;
-                        sheet.Cells[row, 5].Value = cellFoundErro;
-                        sheet.Cells[row, 6].Value = cellCorrectTerm;
-                        sheet.Cells[row, 7].Value = cellPriority;
-                        sheet.Cells[row, 8].Value = cellUser;
-                        sheet.Cells[row, 9].Value = "NS";
+                        sheet.Cells[row, 5].Value = cellWhere;
+                        sheet.Cells[row, 6].Value = cellEnvironment;
+                        sheet.Cells[row, 7].Value = cellFoundErro;
+                        sheet.Cells[row, 8].Value = cellCorrectTerm;
+                        sheet.Cells[row, 9].Value = cellPriority;
+                        sheet.Cells[row, 10].Value = cellUser;
+                        sheet.Cells[row, 11].Value = "NS";
 
                         if (imagemSelecionada != null)
                         {
